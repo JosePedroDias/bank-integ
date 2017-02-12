@@ -2,7 +2,7 @@
 
 ## motivation
 
-Homebanking sites of most portuguese banks are cumbersome and offer no open APIs or decent exporting formats.
+Home banking sites of most Portuguese banks are cumbersome and offer no open APIs or decent exporting formats.
 
 This is an initiative to make that happen, via browser automation. The KISS approach was adopted.
 Pretty much everyone can help out with more banks supported and/or maintaining existing banks.
@@ -10,7 +10,7 @@ Pretty much everyone can help out with more banks supported and/or maintaining e
 
 ## supported banks
 
-* montepio
+* [Montepio](https://www.montepio.pt)
 
 
 ## to run:
