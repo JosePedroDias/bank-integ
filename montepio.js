@@ -62,7 +62,7 @@ module.exports = function montepio(auth, nm) {
                 balance    : parseFloat(parts[4]),
                 date       : dt(parts[6]),
                 time       : tm(parts[8]),
-                ref        : parts[10],
+                ref        : de(parts[10]),
                 _amountMov : parts[2],
                 _mCurrency : parts[3],
                 _location  : parts[5],

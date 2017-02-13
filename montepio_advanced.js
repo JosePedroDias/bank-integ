@@ -149,7 +149,7 @@ module.exports = function montepio(auth, nm) {
                 balance    : parseFloat(parts[4]),
                 date       : dt(parts[6]),
                 time       : tm(parts[8]),
-                ref        : parts[10],
+                ref        : de(parts[10]),
                 _amountMov : parts[2],
                 _mCurrency : parts[3],
                 _location  : parts[5],
@@ -171,7 +171,7 @@ module.exports = function montepio(auth, nm) {
   }
 
   // simple application
-  return new Promise(function(resolve, reject) {
+  /*return new Promise(function(resolve, reject) {
     logIn(auth.username, auth.password)
     .then(function() {
       getRecentTransactions(auth.account)
@@ -182,7 +182,7 @@ module.exports = function montepio(auth, nm) {
       .catch(reject);
     })
     .catch(reject);
-  });
+  });*/
 
   // advanced usage
   return new Promise(function(resolve, reject) {
