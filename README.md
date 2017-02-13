@@ -13,6 +13,11 @@ Pretty much everyone can help out with more banks supported and/or maintaining e
 * [Montepio](https://www.montepio.pt)
 
 
+## TODO
+
+* in the montepio_advanced module, the promise isn't returning as it should
+
+
 ## to run:
 
     npm install
