@@ -104,11 +104,11 @@ module.exports = function montepio(auth, nm) {
               function step() {
                 parseTransactionPage()
                 .then(function(res) {
-                  console.log('GOT %s RESULTS', res.length);
+                  // console.log('GOT %s RESULTS', res.length);
                   allResults = allResults.concat(res);
                   hasMoreTransactionPages()
                   .then(function(hasMore) {
-                    console.log('MORE? %s', hasMore);
+                    // console.log('MORE? %s', hasMore);
                     if (!hasMore) {
                       resolve(allResults); return;
                     }

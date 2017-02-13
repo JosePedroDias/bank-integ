@@ -47,18 +47,16 @@ module.exports = function montepio(auth, nm) {
           .click('input[value="Últimos Movimentos"]') // press the últimos movimentos button
 
           .wait('table td.tdClass1, table td.tdClass2') // wait for results markup to exist
-          .evaluate(function() { // parse markup into array of transactions w/ { date, desc, amount, balance }
-            function de(s) { return decodeURIComponent(s).replace(/\+/g, ' '); }
+          .evaluate(function() { // parse markup into array of transactions
+            function de(s) { return unescape( s.replace(/\+/g, ' ') ); }
             function dt(s) { return [s.substring(0, 4), s.substring(4, 6), s.substring(6, 8)].join('-'); }
             function tm(s) { return [s.substring(0, 2), s.substring(2, 4)].join(':'); }
-            const arr = [];
-            Array.prototype.slice.apply( document.querySelectorAll('table td.tdClass1, table td.tdClass2') )
-            .forEach(function(el, i) {
-              if (i % 5 !== 2) { return; }
-              const aEl = el.querySelector('a');
-              const s = (/\)[^\(]+\(([^\)]+)/).exec( aEl.onclick.toString() )[1];
-              const parts = s.replace(/'/g, '').split(',');
-              arr.push({
+            return Array.prototype.slice.apply( document.querySelectorAll('table td.tdClass1 a, table td.tdClass2 a') )
+            .map(function(aEl) {
+              aEl.style.fontWeight = 'bold'; // DEBUG
+              const s = (/\)[^\(]+\(([^\)]+)/).exec( aEl.onclick.toString() )[1]; // console.log(s);
+              const parts = s.replace(/'/g, '').split(','); // console.log(parts);
+              return {
                 desc       : de(parts[0]),
                 amount     : parseFloat(parts[1]),
                 balance    : parseFloat(parts[4]),
@@ -76,9 +74,8 @@ module.exports = function montepio(auth, nm) {
                 _accountNr : parts[14],
                 _cterm     : parts[15],
                 _zjournal  : parts[16]
-              });
+              };
             });
-            return arr;
           })
           .end() // dismiss nightmare browser
           .then(function (res) { resolve(res); }) // return back the result
