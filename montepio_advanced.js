@@ -170,34 +170,22 @@ module.exports = function montepio(auth, nm) {
     );
   }
 
-  // simple application
-  /*return new Promise(function(resolve, reject) {
-    logIn(auth.username, auth.password)
-    .then(function() {
-      getRecentTransactions(auth.account)
-      .then(function(res) {
-        nm.end();
-        resolve(res);
-      })
-      .catch(reject);
-    })
-    .catch(reject);
-  });*/
-
-  // advanced usage
   return new Promise(function(resolve, reject) {
+    console.log('Logging in to %s user...', auth.username);
     logIn(auth.username, auth.password)
     .then(function() {
-      //getTransactions(auth.account, '2016-09-01', '2016-10-31')
-      //getTransactions(auth.account, '2016-11-01', '2016-12-31')
-      getTransactions(auth.account, '2017-01-01', '2017-02-12')
-      .then(function(res) {
-        nm.end();
-        resolve(res);
-      })
-      .catch(reject);
+      const _then = function(res) {
+        resolve(res); nm.end();
+      }
+      if (!auth.startDate || !auth.endDate) {
+        console.log('Fetching recent transactions from %s account...', auth.account);
+        getRecentTransactions(auth.account).then(_then).catch(reject);
+      }
+      else {
+        console.log('Fetching transactions from %s to %s of %s account...', auth.startDate, auth.endDate, auth.account);
+        getTransactions(auth.account, auth.startDate, auth.endDate).then(_then).catch(reject);
+      }
     })
     .catch(reject);
   });
-
 };
