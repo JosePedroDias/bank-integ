@@ -34,7 +34,7 @@ do the following for your account (must edit account name):
 
 explore features several possible filters and sorting. edit to tweak.
 
-each row is tagged according to a set of criteria defined in `classify.js`. edit to match yours...
+each row is tagged according to a set of criteria defined in `classify.js`. you must edit it to match your categories/habits...
 
 
 ## to plot cash flow graphs

@@ -17,12 +17,61 @@ function subs(big, smalls) {
 
 const classifiers = [];
 
+classifiers.push( function isBank(o) {
+  if (subs(o.desc, [
+    'MGAM',
+    'DESP.TRF.'
+  ])) { return 'bank'; }
+} );
+
+classifiers.push( function isTax(o) {
+  if (subs(o.desc, [
+    'I.SELO ',
+    'IMP.TRF.'
+  ])) { return 'tax'; }
+} );
+
+classifiers.push( function isTransf(o) {
+  if (subs(o.desc, [
+    'TRF. JOSE PEDRO SACRAMENTO',
+    'TRF. MARIA TAVARES SECO'
+  ])) { return 'transf'; }
+} );
+
+classifiers.push( function isTransfExt(o) {
+  if (subs(o.desc, [
+    'TRF.P/'
+  ])) { return 'transf-ext'; }
+} );
+
+classifiers.push( function isMB(o) {
+  if (subs(o.desc, [
+    'PAG.SERV.',
+    'PAG. NET24'
+  ])) { return 'mb'; }
+} );
+
+classifiers.push( function isAtm(o) {
+  if (subs(o.desc, [
+    '7255'
+  ])) { return 'atm'; }
+} );
+
 classifiers.push( function isPay(o) {
   if (sub(o.desc, 'SKY CP LIMITED')) { return 'pay'; }
 } );
 
 classifiers.push( function isApart(o) {
   if ((/^TRF.P\/ FARINHA/).test(o.desc)) { return 'apart'; }
+  if ((/^TRF.P\/ VITOR FARINHA/).test(o.desc)) { return 'apart'; }
+  if ((/CONDIMINIO/).test(o.desc)) { return 'apart'; }
+} );
+
+classifiers.push( function isCommodity(o) {
+  if (subs(o.desc, [
+    'AGUA/GAS',
+    'EDP'
+  ])) { return 'commodity'; }
 } );
 
 classifiers.push( function isGas(o) {
@@ -45,16 +94,21 @@ classifiers.push( function isRestaurant(o) {
     'BURGUERS E BEER',
     'CACHORRO VADIO',
     'CASA PIZZA',
+    'CONFEITARIA',
     'DI HAU',
+    'DOMINO\'S',
     'ESPACO ESPELHO DAGUA',
     'GIL & PEDRO',
     'GUACAMOLE',
+    'H3 ',
     'HAMBURGUERIA DO',
     'HANAMI SUSHI',
+    'HONORATO',
     'LEONARDO E BRANCO',
     'MARISQUEIRA',
     'MC DONALD',
     'MCDONALD',
+    'MERCADO ALGES',
     'MERCEARIA DE L PRAIN',
     'NOSOLO ITALIA',
     'NOTAVEL SIMBIOSE',
@@ -63,17 +117,20 @@ classifiers.push( function isRestaurant(o) {
     'PITADA BOEMIA',
     'PLATAFORMA GULOSA',
     'RELENTO',
-    'RESTAURANTE',
+    'RESTAURANT',
+    'RESTIBERICA',
     'SABE BEM',
     'SABEBEM',
     'SELFISH',
+    'SLOW ALFRAGIDE',
+    'SOUP ',
     'STOP-BENFICA',
     'TELEPIZZA',
     'WTW ALEGRO',
   ])) { return 'rest'; }
 } );
 
-classifiers.push( function isSuper(o) {
+classifiers.push( function isBar(o) {
   if (subs(o.desc, [
     'FINE FLAVOURS',
     'TAILORS COPOS',
@@ -104,16 +161,12 @@ classifiers.push( function isFurn(o) {
   ])) { return 'furn'; }
 } );
 
-classifiers.push( function isAtm(o) {
+classifiers.push( function isEvent(o) {
   if (subs(o.desc, [
-    '7255'
-  ])) { return 'atm'; }
-} );
-
-classifiers.push( function isCinema(o) {
-  if (subs(o.desc, [
-    'CINEMA'
-  ])) { return 'cinema'; }
+    'BOL',
+    'CINEMA',
+    'TICKET'
+  ])) { return 'event'; }
 } );
 
 classifiers.push( function isHealth(o) {
@@ -128,13 +181,6 @@ classifiers.push( function isSchool(o) {
   ])) { return 'school'; }
 } );
 
-classifiers.push( function isSport(o) {
-  if (subs(o.desc, [
-    'AIRFUT',
-    'DECATHLON',
-  ])) { return 'sport'; }
-} );
-
 classifiers.push( function isSubs(o) {
   if (subs(o.desc, [
     'DECO',
@@ -142,6 +188,14 @@ classifiers.push( function isSubs(o) {
     'MEDIPRESS',
     'nespresso',
   ])) { return 'subs'; }
+} );
+
+classifiers.push( function isNetBuy(o) {
+  if (subs(o.desc, [
+    'GOG.COM',
+    'ITUNES',
+    'MICROSOFT',
+  ])) { return 'net-buy'; }
 } );
 
 classifiers.push( function isNetSvc(o) {
@@ -175,23 +229,31 @@ classifiers.push( function isToys(o) {
   ])) { return 'toys'; }
 } );
 
-classifiers.push( function isBank(o) {
+classifiers.push( function isFashion(o) {
   if (subs(o.desc, [
-    'C&A'
+    'AIRFUT',
+    'C&A',
+    'DECATHLON',
+    'EL CORTE INGLES',
+    'SEASIDE'
   ])) { return 'fashion'; }
 } );
 
-classifiers.push( function isBank(o) {
+classifiers.push( function isGift(o) {
+  if (subs(o.desc, [
+    'BIMBA E LOLA',
+    'FLOWERS',
+    'IN TIME',
+    'PERFUMES',
+    'RITUALS'
+  ])) { return 'gift'; }
+} );
+
+classifiers.push( function isCar(o) {
   if (subs(o.desc, [
     'PORTAGENS',
     'SANTOGAL'
   ])) { return 'car'; }
-} );
-
-classifiers.push( function isBank(o) {
-  if (subs(o.desc, [
-    'MGAM'
-  ])) { return 'bank'; }
 } );
 
 classifiers.push( function isHelp(o) {
@@ -201,13 +263,24 @@ classifiers.push( function isHelp(o) {
 } );
 
 
+// sink tags follow
+classifiers.push( function isNegative(o) {
+  if (o.amount < 0) { return 'negative'; }
+} );
+
+classifiers.push( function isPositive(o) {
+  return 'positive';
+} );
+
 
 module.exports = function(rows) {
   rows.forEach(function(o) {
-    o.tags = [];
-    classifiers.forEach(function(classifier) {
-      const res = classifier(o);
-      if (res) { o.tags.push(res); }
+    classifiers.find(function(classifier) {
+      const tag = classifier(o);
+      if (tag) {
+        o.tag = tag;
+        return true;
+      }
     })
   });
 }

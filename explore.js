@@ -46,30 +46,31 @@ function pad(s, n, r) {
 classify(rows);
 
 
-rows.forEach(function(o) {
-  o.tags = o.tags.join(' ');
-  delete o.date;
-  delete o.time;
-  delete o.ts;
-  delete o.ref;
-  delete o._id;
-});
-fs.writeFileSync( 'rows.json', JSON.stringify(rows) );
-process.exit(0);
+if (1) { // save relevant data for graphing and leave
+  rows.forEach(function(o) {
+    delete o.desc;
+    delete o.date;
+    delete o.time;
+    delete o.ts;
+    delete o.ref;
+    delete o._id;
+  });
+  fs.writeFileSync( 'rows.json', JSON.stringify(rows) );
+  process.exit(0);
+}
 
 
+// optional, to improve tag classification
+//rows = rows.filter(function(o) { return ['positive', 'negative'].includes(o.tag); }) // ONLY THOSE
 
+
+// print rows as ascii table...
 rows.forEach(function(o) {
   o.amount  = o.amount.toFixed(2);
   o.balance = o.balance.toFixed(2);
   o.dow = dows[ new Date( o.dateS ).getDay() ];
   o.dateS = o.dateS.substring(5, 16).replace('T', ' ');
-  o.tags = o.tags.join(' ');
 });
-
-// rows = rows.filter(function(o) { return !o.tags; }) // ONLY THOSE
-
-
 
 tab.emitTable({
   columnSeparator: '|',
@@ -80,7 +81,7 @@ tab.emitTable({
     { label:'amount',  align:'right', width: 10 },
     { label:'desc',    align:'left',  width: 30 },
     { label:'ref',     align:'left',  width: 15 },
-    { label:'tags',    align:'left',  width: 20 }
+    { label:'tag',     align:'left',  width: 20 }
   ],
   rows: rows
 });
