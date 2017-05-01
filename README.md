@@ -16,7 +16,6 @@ Pretty much everyone can help out with more banks supported and/or maintaining e
 ## TODO
 
 * in the montepio_advanced module, the promise isn't returning as it should
-* there seems to be a bug in graph.js. it's marked as @TODO: there.
 
 
 ## to run:

@@ -87,7 +87,6 @@ ajax({
     o.forEach(function(e) {
       const d = new Date(e.dateS);
       const month = `${d.getFullYear()}-${d.getMonth()+1}`;
-      // console.log(month);
       let monthBag;
       if (month !== currentMonth) {
         monthBag = [];
@@ -102,8 +101,6 @@ ajax({
     //console.log(labels);
     //console.log(bag);
 
-    // @TODO: may be a bug - discrepancy between overall negative and negative tags for the same month!
-
     // process month events
     o = bag.map(function(es) {
       let positive = 0;
@@ -112,8 +109,8 @@ ajax({
       es.forEach(function(e) {
         if (e.amount >= 0) { positive += e.amount; }
         else {               negative += e.amount; }
-        const tag = e.tags || (e.amount >= 0 ? 'positive' : 'negative');
-        if (!('tag' in tags)) { tags[tag] = 0; }
+        const tag = e.tags || (e.amount >= 0 ? 'positive' : 'negative'); // inject generic tags for untagged rows
+        if (!(tag in tags)) { tags[tag] = 0; }
         tags[tag] += e.amount;
       });
 
@@ -194,8 +191,10 @@ ajax({
       const chart = c3.generate({
         data: {
           rows: rows,
-          type: 'area-spline', groups: [ stack1, stack2 ], // area area-spline area-step
-          //type: 'bar', groups: [ tags ],
+          type: 'area',
+          _type: 'area-spline',
+          __type: 'bar',
+          groups: [ stack1, stack2 ],
           order: null
         },
         grid: { y: { lines: [{value:0}] } },
