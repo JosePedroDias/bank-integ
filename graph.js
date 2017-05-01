@@ -129,7 +129,7 @@ ajax({
     // http://c3js.org/reference.html
     // http://c3js.org/examples.html
 
-    if (!hasTags) {
+    if (!hasTags) { // cash flow graph
       const balCol = o.map(function(e) { return e.balance;  }); balCol.unshift('balance');
       const netCol = o.map(function(e) { return e.net;      }); netCol.unshift('net');
       const posCol = o.map(function(e) { return e.positive; }); posCol.unshift('positive');
@@ -157,11 +157,13 @@ ajax({
         axis: { x: { tick: { format: function(i) { return labels[i]; } } } },
         tooltip: { format: { value: function (value, ratio, id, index) { return value.toFixed(2); } } }
       });
-    } else {
+    } else { // tags stacked area graph
       // find relevant signs and sort by sign
+      const ignoreTags = [];// 'positive', 'negative', 'pay', 'help', 'electro', 'subs', 'bank', 'bar', 'toys', 'cinema', 'net-svc', 'atm', 'fashion', 'car', 'furn', 'school', 'sport', 'hotel', 'health', 'apart', 'brico'];
       let tagSigns = {};
       o.forEach(function(e) {
         for (let tag of Object.keys(e.tags)) {
+          if (ignoreTags.indexOf(tag) !== -1) { continue; }
           const isNeg = e.tags[tag] < 0;
           const sign = (isNeg ? '-' : '+');
           tagSigns[tag] = sign;
@@ -179,6 +181,7 @@ ajax({
         const row = defaultRow.slice();
         for (let tag of Object.keys(e.tags)) {
           const index = tags.indexOf(tagSigns[tag] + tag);
+          if (index === -1) { continue; }
           row[index] = e.tags[tag];
         }
         rows.push(row);
