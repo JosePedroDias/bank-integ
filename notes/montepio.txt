@@ -1,0 +1,41 @@
+document.formDetalhe.Mdescricao.value=mdesc
+		document.formDetalhe.Mimportancia.value=mimpo
+		document.formDetalhe.Mimportanciamov.value=mimpop
+		document.formDetalhe.Mmoedaop.value=cmoed
+		document.formDetalhe.Msaldo.value=msald
+		document.formDetalhe.Mlocal.value=mloca
+		document.formDetalhe.Mdatamovimento.value=mdatam
+		document.formDetalhe.Mdatavalor.value=mdatav
+		document.formDetalhe.Mhora.value=mhora
+		document.formDetalhe.Mncheque.value=mnche
+		document.formDetalhe.Mreferencia.value=mrefe
+		document.formDetalhe.cmoeda.value = cmoeda
+		document.formDetalhe.Mcoperac.value=mcoper
+		document.formDetalhe.cbalcao.value=cbalcao
+		document.formDetalhe.numconta.value=numconta
+		document.formDetalhe.cterm.value=cterm;
+		document.formDetalhe.zjournal.value=zjournal;
+
+['COMPRA+++PAPAGAIO+SEM+PENAS', // 0 desc
+    '-17.99',   // 1 amount
+    '-17.99',   // 2 amountMov
+    'EUR',      // 3 currencyMov
+    '11304.19', // 4 balance
+    '018',      // 5 ?
+    '20170212', // 6 date0
+    '20170212', // 7 date1
+    '1414',     // 8 hhmm
+    '0',        // 9 ? cheque?
+    '170431414463514', // 10 reference
+    'EUR', // 11 currencyC
+    'SEC', // 12 mcOperacao?
+    '019', // 13 balcao?
+    '100068360', // 14 numConta
+    'SB00', // 15 cTerm
+    '296273' ], // 16 zJournal
+
+
+  { amount: -17.99,
+    balance: 11304.19,
+    date: '2017-02-12',
+    desc: 'COMPRA PAPAGAIO SEM PENAS' },

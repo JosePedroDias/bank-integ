@@ -3,12 +3,13 @@
   "version": "1.0.0",
   "description": "",
   "main": "main.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "scripts": {},
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "nightmare": "^2.9.1"
+    "electron": "*",
+    "extract-zip": "=1.6.0",
+    "nightmare": "*",
+    "tab": "^1.0.0"
   }
 }

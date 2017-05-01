@@ -19,8 +19,9 @@ module.exports = function montepio(auth, nm) {
   return new Promise(function(resolve, reject) {
     nm.viewport(1024, 768)
       .goto('https://www.montepio.pt/SitePublico/pt_PT/particulares.page') // visit site
+      .click('.js-net24-toggle')
       .type('input[id="loginid_IN"]', auth.username) // insert username
-      .click('input[id="net24Submit"]') // click OK submit button
+      .click('button[id="net24Submit"]') // click OK submit button
       .wait('input[class="fldCheckConfirmation"]') // wait for confirmation popup
       .click('input[class="fldCheckConfirmation"]') // accept warning
       .evaluate(function() { // determine the order of the pin buttons on the pin form
@@ -38,7 +39,7 @@ module.exports = function montepio(auth, nm) {
           .click('input[class="pinButton"][name="b' + pinClicks[3] + '"]')
           .click('input[class="pinButton"][name="b' + pinClicks[4] + '"]')
           .click('input[class="pinButton"][name="b' + pinClicks[5] + '"]')
-          .wait(200)
+          .wait(1000)
           .wait(CONTAS_A_ORDEM_HREF) // wait for contas à ordem link to exist
           .click(CONTAS_A_ORDEM_HREF) // click there
           .click(MOVIMENTOS_HREF) // click on the movimentos link

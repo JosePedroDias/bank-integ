@@ -5,9 +5,9 @@ const integ = require('./' + auth.bank);
 // const integ = require('./montepio_advanced');
 const Nightmare = require('nightmare');
 
-const nm = Nightmare();
+// const nm = Nightmare();
 // const nm = Nightmare({show: true});
-// const nm = Nightmare({show: true, openDevTools: { mode: 'detach' } });
+const nm = Nightmare({show: true, openDevTools: { mode: 'detach' } });
 
 integ(auth, nm)
 .then(function(res) { console.log(res); })

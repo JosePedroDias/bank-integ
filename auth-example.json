@@ -1,6 +1,7 @@
 {
   "bank": "montepio",
-  "username": "USER",
+  "username": "ABCD",
   "password": "123456",
-  "account": "12312313131231231"
+  "account": "asdasdasdasd",
+  "startDate": "2017-04-01", "endDate": "2017-04-30"
 }
