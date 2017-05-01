@@ -129,6 +129,9 @@ ajax({
     });
     //console.log(o);
 
+    // http://c3js.org/reference.html
+    // http://c3js.org/examples.html
+
     if (!hasTags) {
       const balCol = o.map(function(e) { return e.balance;  }); balCol.unshift('balance');
       const netCol = o.map(function(e) { return e.net;      }); netCol.unshift('net');
